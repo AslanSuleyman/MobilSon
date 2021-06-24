@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/profile"></ion-back-button>
+
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="save()">
+        <ion-icon slot="icon-only" name="checkmark-done-outline"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
+    <ion-title>Profili Düzenle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row class="ion-justify-content-center">
+    <ion-col>
+      <div class="sp-center ion-margin">
+        <img class="profile-avatar" [src]="img" alt="">
+      </div>
+    </ion-col>
+
+  </ion-row>
+
+
+  <ion-button expand="block" fill="clear" (click)="takePicture()">
+    Profil Fotoğrafını değiştir
+  </ion-button>
+  <ion-list>
+
+    <ion-item>
+      <ion-label position="floating">Ad</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Soyisim</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Doğum Yeri</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,270 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button disabled="true">
+        <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">
+      {{userInf.displayName}}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> 
+
+<ion-content>
+  <ion-refresher slot="fixed" style="--ion-text-color: var(--ion-color-medium);" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down-outline"></ion-refresher-content>
+  </ion-refresher>
+
+  
+  <ion-grid >
+    <ion-row class="ion-align-items-start">
+      <ion-col size="4">
+        <ion-item lines="none">
+          <ion-avatar slot="start" style="width: 72px;height: 72px;">
+            <img src="../../../assets/img/user.png" />
+          </ion-avatar>
+
+        </ion-item>
+      </ion-col>
+      <ion-col size="4" class="ion-padding sp-center">
+        <ion-badge color="light" mode="ios">42</ion-badge>
+        <p  class="ion-text-center">
+          <strong>Gönderi Sayısı</strong>
+
+        </p>
+      </ion-col>
+      <ion-col size="4" class="ion-padding sp-center">
+        <ion-badge color="light" mode="ios">42</ion-badge>
+        <p class="ion-text-center">
+          <strong>Beğeni</strong>
+
+        </p>
+      </ion-col>
+      
+    </ion-row>    
+  </ion-grid>
+    <ion-item [routerLink]="['/edit-profile/false']"  button class="ion-text-center" color="light" lines="none">
+      <ion-label>Profili Düzenle</ion-label>
+    </ion-item>
+    <ion-segment class="ion-margin-top" mode="md" (ionChange)="segmentChanged($event)" [(ngModel)]="segment">
+      <ion-segment-button value="0" >
+        <ion-label>Gönderilerin</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1" >
+        <ion-label>Beğendiğin Gönderiler</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-slides #slides pager="false" [options]="slidesOptions" (ionSlideDidChange)="slideChanged($event)">
+      <ion-slide>
+        <ion-row>
+          <ion-col size="6">
+            <ion-card>
+              <img src="../../../assets/img/card-3.jpg" alt="">
+              <ion-card-content>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, omnis!  
+              </ion-card-content>
+              <ion-item lines="none" class="action-item">
+                <ion-buttons slot="start">
+                  <ion-button color="medium" class="action-button" (click)="toggleLike()">
+                    <ion-icon *ngIf="!like" slot="start" name="heart-outline"></ion-icon>
+                    <ion-icon *ngIf="like" slot="start" color="danger" name="heart"></ion-icon>
+                    3
+                  </ion-button>
+                  <ion-button color="medium" class="action-button" disabled="true">
+                    <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+                   4
+                  </ion-button>
+                
+                </ion-buttons>
+      
+                
+              </ion-item>
+            </ion-card>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card>
+              <img src="../../../assets/img/card-3.jpg" alt="">
+              <ion-card-content>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, omnis!  
+              </ion-card-content>
+              <ion-item lines="none" class="action-item">
+                <ion-buttons slot="start">
+                  <ion-button color="medium" class="action-button" (click)="toggleLike()">
+                    <ion-icon *ngIf="!like" slot="start" name="heart-outline"></ion-icon>
+                    <ion-icon *ngIf="like" slot="start" color="danger" name="heart"></ion-icon>
+                    3
+                  </ion-button>
+                  <ion-button color="medium" class="action-button" disabled="true">
+                    <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+                   4
+                  </ion-button>
+                
+                </ion-buttons>
+      
+                
+              </ion-item>
+            </ion-card>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card>
+              <img src="../../../assets/img/card-3.jpg" alt="">
+              <ion-card-content>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, omnis!  
+              </ion-card-content>
+              <ion-item lines="none" class="action-item">
+                <ion-buttons slot="start">
+                  <ion-button color="medium" class="action-button" (click)="toggleLike()">
+                    <ion-icon *ngIf="!like" slot="start" name="heart-outline"></ion-icon>
+                    <ion-icon *ngIf="like" slot="start" color="danger" name="heart"></ion-icon>
+                    3
+                  </ion-button>
+                  <ion-button color="medium" class="action-button" disabled="true">
+                    <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+                   4
+                  </ion-button>
+                
+                </ion-buttons>
+      
+                
+              </ion-item>
+            </ion-card>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card>
+              <img src="../../../assets/img/card-3.jpg" alt="">
+              <ion-card-content>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, omnis!  
+              </ion-card-content>
+              <ion-item lines="none" class="action-item">
+                <ion-buttons slot="start">
+                  <ion-button color="medium" class="action-button" (click)="toggleLike()">
+                    <ion-icon *ngIf="!like" slot="start" name="heart-outline"></ion-icon>
+                    <ion-icon *ngIf="like" slot="start" color="danger" name="heart"></ion-icon>
+                    3
+                  </ion-button>
+                  <ion-button color="medium" class="action-button" disabled="true">
+                    <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+                   4
+                  </ion-button>
+                
+                </ion-buttons>
+      
+                
+              </ion-item>
+            </ion-card>
+          </ion-col>
+          <ion-col size="6">
+            <ion-card>
+              <img src="../../../assets/img/card-3.jpg" alt="">
+              <ion-card-content>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, omnis!  
+              </ion-card-content>
+              <ion-item lines="none" class="action-item">
+                <ion-buttons slot="start">
+                  <ion-button color="medium" class="action-button" (click)="toggleLike()">
+                    <ion-icon *ngIf="!like" slot="start" name="heart-outline"></ion-icon>
+                    <ion-icon *ngIf="like" slot="start" color="danger" name="heart"></ion-icon>
+                    3
+                  </ion-button>
+                  <ion-button color="medium" class="action-button" disabled="true">
+                    <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+                   4
+                  </ion-button>
+                
+                </ion-buttons>
+      
+                
+              </ion-item>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+       
+      </ion-slide>
+      <ion-slide>
+       <ion-row>
+        <ion-col size="6" *ngFor="let post of Posts; let i=index">
+          <ion-card>
+            <img [src]="post.imgUrl" alt="">
+            <ion-card-content>
+              {{post.header}}
+            </ion-card-content>
+            <ion-item lines="none" class="action-item">
+              <ion-buttons slot="start">
+                <ion-button color="medium" class="action-button" (click)="toggleLike()">
+                  <ion-icon *ngIf="!like" slot="start" name="heart-outline"></ion-icon>
+                  <ion-icon *ngIf="like" slot="start" color="danger" name="heart"></ion-icon>
+                  {{post.likeCount}}
+                </ion-button>
+                <ion-button color="medium" class="action-button" disabled="true">
+                  <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+                  {{post.commentCount}}
+                </ion-button>
+              
+              </ion-buttons>
+    
+              
+            </ion-item>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card>
+            <img src="../../../assets/img/card-3.jpg" alt="">
+            <ion-card-content>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, omnis!  
+            </ion-card-content>
+            <ion-item lines="none" class="action-item">
+              <ion-buttons slot="start">
+                <ion-button color="medium" class="action-button" (click)="toggleLike()">
+                  <ion-icon *ngIf="!like" slot="start" name="heart-outline"></ion-icon>
+                  <ion-icon *ngIf="like" slot="start" color="danger" name="heart"></ion-icon>
+                  3
+                </ion-button>
+                <ion-button color="medium" class="action-button" disabled="true">
+                  <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+                 4
+                </ion-button>
+              
+              </ion-buttons>
+    
+              
+            </ion-item>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card>
+            <img src="../../../assets/img/card-3.jpg" alt="">
+            <ion-card-content>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, omnis!  
+            </ion-card-content>
+            <ion-item lines="none" class="action-item">
+              <ion-buttons slot="start">
+                <ion-button color="medium" class="action-button" (click)="toggleLike()">
+                  <ion-icon *ngIf="!like" slot="start" name="heart-outline"></ion-icon>
+                  <ion-icon *ngIf="like" slot="start" color="danger" name="heart"></ion-icon>
+                  3
+                </ion-button>
+                <ion-button color="medium" class="action-button" disabled="true">
+                  <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+                 4
+                </ion-button>
+              
+              </ion-buttons>
+    
+              
+            </ion-item>
+          </ion-card>
+        </ion-col>
+       </ion-row>
+      </ion-slide>
+      
+    </ion-slides>
+  
+</ion-content>

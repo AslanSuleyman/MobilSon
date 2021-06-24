@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="Geri " defaultHref="/tabs/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ayarlar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <ng-container *ngFor="let set of settings; let index = index">
+      <!-- <ion-item-divider class="divider-bg" *ngIf="index === 0 || index === 1 || index === 7">
+      </ion-item-divider>
+      <ion-item button [routerLink]="set.link" routerDirection="forward">
+        <ion-icon color="primary" slot="start" [name]="set.icon"></ion-icon>
+        <ion-label>{{'settings_' + set.id + '_title'  }}</ion-label>
+      </ion-item> -->
+    </ng-container>
+    <ion-item button detail="false" [routerLink]="['/tabs/profile']" routerLinkActive="router-link-active"  >
+      <ion-label color="danger">Profil</ion-label>
+    </ion-item>
+    <ion-item-divider class="divider-bg"></ion-item-divider>
+    <ion-item button detail="false" (click)="logout()" >
+      <ion-label color="danger">Çıkış Yap</ion-label>
+    </ion-item>
+    <ion-item-divider class="divider-bg"></ion-item-divider>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,13 @@
+
+<!-- Post Menü -->
+<ion-list lines="none" *ngIf="trigger == 'post'" >
+  <ion-item  button class="item" (click)="removePost()">Sil  <ion-icon color="danger" name="trash-outline" size="small" slot="end"></ion-icon></ion-item>
+  <ion-item button class="item" (click)="editPost()">Düzenle <ion-icon color="warning" slot="end" size="small" name="create-outline"></ion-icon></ion-item>
+</ion-list>
+
+
+<!-- Yorum Menü -->
+<ion-list lines="none" *ngIf="trigger == 'comment' " >
+  <ion-item  button class="item" (click)="removeComment()">Sil  <ion-icon color="danger" name="trash-outline" size="small" slot="end"></ion-icon></ion-item>
+  <ion-item button class="item" (click)="editComment()">Düzenle <ion-icon color="warning" slot="end" size="small" name="create-outline"></ion-icon></ion-item>
+</ion-list>

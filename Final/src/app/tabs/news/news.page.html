@@ -1,0 +1,161 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="toggleMenu()">
+        <ion-icon slot="icon-only" name="camera-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-segment [formControl]="activeSegment">
+      <ion-segment-button value="news">
+        Anasayfa
+      </ion-segment-button>
+      <!-- <ion-segment-button value="discover">
+        {{'discover_title'  }}
+      </ion-segment-button> -->
+    </ion-segment>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="[ '/tabs', 'news', 'settings' ]" routerDirection="forward">
+        <ion-icon slot="icon-only" name="scan-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar *ngIf="activeSegment.value === 'discover'">
+    <div scrollX="true">
+      <ion-chip class="scrollX" *ngFor="let dis of discoverCategories"
+        [color]="activeDiscover.value === dis.id ? 'primary' : 'medium'">
+        <ion-label>{{'discover_categories.' + dis.id  }}</ion-label>
+      </ion-chip>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+  <ion-refresher slot="fixed" style="--ion-text-color: var(--ion-color-medium);" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down-outline"></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- News tab -->
+  <div [ngClass]="{'ion-hide': activeSegment.value !== 'news'}">
+
+    <!-- Post card -->
+    <ion-card class="post-card" *ngIf="stories.length">
+      <ion-item lines="none" class="post-item">
+        <ion-avatar slot="start">
+          <img [src]="stories[0].image">
+        </ion-avatar>
+        <ion-button class="post-some" color="light">
+          <span class="post-some-title">{{'whats_new'  }}</span>
+        </ion-button>
+        <ion-buttons slot="end">
+          <ion-button color="medium">
+            <ion-icon slot="icon-only" name="image-outline"></ion-icon>
+          </ion-button>
+          <ion-button color="medium">
+            <ion-icon slot="icon-only" name="disc-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+    <!-- Users stories list -->
+    <!-- <ion-card class="stories-card" scrollX="true">
+      <ion-list lines="none" class="story-list scrollX" *ngFor="let story of stories" (click)="playMusic()">
+        <ion-item lines="none" class="story-item">
+          <ion-avatar class="story-avatar" [ngClass]="{'seen': false}">
+            <img [src]="story.image">
+          </ion-avatar>
+        </ion-item>
+        <div class="story-author">
+          <ion-text color="primary">
+            {{story.first_name}}
+          </ion-text>
+        </div>
+      </ion-list>
+    </ion-card> -->
+
+    <!-- Users posts -->
+    <ng-container>
+      <ion-card  *ngFor="let item of Posts" class="post-list-card">
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <img [src]="item.creatorPhoto">
+          </ion-avatar>
+          <ion-label>
+            {{item.creatorName}}
+            <p> {{item.createDate | dateAgo}}</p>
+          </ion-label>
+          <ion-buttons slot="end">
+            <ion-button color="medium" (click)="openSelect('post')"> 
+              <ion-icon slot="icon-only" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+        <ion-img [src]="item.imgUrl"></ion-img>
+        <ion-card-content class="post-list-content">
+          <p>{{item.header}}</p>
+        </ion-card-content>
+
+        <div *ngIf="show" @listAnimation>
+          <ion-item class="item item-label" lines="none" *ngFor="let comment of Comments">
+          <div class="comment-avatar">
+            <ion-avatar  slot="start" >
+              <img class="comment-avatar-img" [src]="comment.userPhoto? comment.userPhoto:'https://firebasestorage.googleapis.com/v0/b/web-project-837d4.appspot.com/o/UserPhotos%2Fuser-avatar.png?alt=media&token=e9a0bc68-65c6-4e03-92f5-c53145c3ed07'">
+            </ion-avatar>
+          </div>
+          <ion-label>
+            <h2>{{comment.username}}</h2>
+            <!-- <h3>I can handle myself</h3> -->
+            <p class="ion-padding-end">{{comment.comment}}</p>
+            
+          </ion-label>
+          <ion-icon (click)="openSelect('comment')" class="ion-padding-end" slot="end" size="small" md="ellipsis-vertical-outline" ios="ellipsis-horizontal-outline"></ion-icon>
+        </ion-item>
+    
+         
+        </div>
+        <ion-item lines="none" class="post-item">
+          <ion-avatar slot="start">
+            <img  [src]="userInf.photoURL ? userInf.photoURL:'https://firebasestorage.googleapis.com/v0/b/web-project-837d4.appspot.com/o/UserPhotos%2Fuser-avatar.png?alt=media&token=e9a0bc68-65c6-4e03-92f5-c53145c3ed07'">
+          </ion-avatar>
+          <ion-input type="text"  class="comment-input" placeholder="Yorum yazınız"></ion-input>
+   
+          <ion-buttons slot="end" class="ion-padding-end">
+          
+            <ion-button color="medium">
+              <ion-icon name="send-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+  
+        <ion-item lines="none" class="action-item">
+          <ion-buttons slot="start">
+            <ion-button color="medium" class="action-button" (click)="addLike(item)">
+              <ion-icon *ngIf="!getLikeStatus(item)" slot="start" name="heart-outline"></ion-icon>
+              <ion-icon *ngIf="getLikeStatus(item)" slot="start" color="danger" name="heart"></ion-icon>
+              {{item.likeCount}}
+            </ion-button>
+            <ion-button color="medium" class="action-button" (click)="toggleComment(item)">
+              <ion-icon slot="start" name="chatbox-outline"></ion-icon>
+              <span class="mr-5 ion-lowercase" [innerHTML]="item.commentCount && item.commentCount>0? item.commentCount:'Henüz yorum yok'"></span>
+            </ion-button>
+            <!-- <ion-button color="medium" class="action-button">
+              <ion-icon slot="start" name="return-up-forward-outline"></ion-icon>
+              3
+            </ion-button> -->
+          </ion-buttons>
+
+          <ion-buttons slot="end">
+            <ion-button color="medium">
+              <ion-icon size="small" slot="start" name="eye-outline"></ion-icon>
+              6
+            </ion-button>
+          </ion-buttons>
+        </ion-item>
+     
+      </ion-card>
+    </ng-container>
+  </div>
+
+</ion-content>

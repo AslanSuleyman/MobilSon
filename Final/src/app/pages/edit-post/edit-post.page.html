@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/news"></ion-back-button>
+     
+    </ion-buttons>  
+    <ion-buttons slot="end">
+      <ion-button color="primary" (click)="onClick()">
+        <ion-icon slot="icon-only" name="checkmark-done-outline"></ion-icon>
+      </ion-button>
+     
+    </ion-buttons>
+    <ion-title>Gönderi Düzenle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item lines="full" >
+      <ion-avatar slot="start">
+        <img src="../../../assets/img/user.png">
+      </ion-avatar>
+      <ion-textarea placeholder="Açıklama yaz"></ion-textarea>
+   
+    </ion-item>
+
+    <ion-item lines="full" >
+      <ion-img class="ion-padding" src="../../../assets/img/card-3.jpg"></ion-img>
+    </ion-item>
+  </ion-list>
+  
+      <ion-button expand="block"  (click)="takePicture()" >
+        Tekrar Fotoğraf Çek
+      </ion-button>
+    
+</ion-content>
